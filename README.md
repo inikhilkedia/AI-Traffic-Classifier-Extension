@@ -25,12 +25,53 @@ A Chrome extension that monitors and classifies web traffic to identify AI-relat
 
 ## Technical Details
 
-### Architecture
+### System Architecture
 
-- **Background Service Worker**: Handles request interception and classification
-- **Popup Interface**: Displays request logs with filtering and management options
-- **Storage**: Uses Chrome's local storage for request logging
-- **Pattern Matching**: Employs RegExp patterns for accurate AI service detection
+```text
++-------------------+         +-------------------+         +-------------------+
+|                   |         |                   |         |                   |
+|   Browser Tabs    +-------->+ Background Script +-------->+   Chrome Storage  |
+|                   |         |                   |         |                   |
++-------------------+         +-------------------+         +-------------------+
+                                      |   ^                          ^
+                                      |   |                          |
+                                      v   |                          |
+                              +-------------------+                  |
+                              |   Popup UI        +------------------+
+                              | (Log Display,     |
+                              |  Clear Button)    |
+                              +-------------------+
+```
+
+### Data Flow
+
+```text
+1. Browser makes a web request
+2. Background script intercepts the request
+3. Request is classified (AI-related or not)
+4. Request details are saved to Chrome Storage
+5. If high-confidence AI request, badge is updated
+6. Popup UI reads logs from storage and displays them
+7. User can clear logs and reset badge from the popup
+```
+
+### Component Interaction
+
+```text
+[Browser Tab]
+     |
+     v
+[Background Script]
+     |
+     v
+[Request Classifier]---+
+     |                 |
+     v                 |
+[Storage Manager] <----+
+     |
+     v
+[Popup UI] <----> [User]
+```
 
 ### Detection Patterns
 
