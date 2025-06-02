@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Traffic Monitor</title>
+</head>
+
+<body>
+  <h1>AI Traffic Monitor</h1>
+  <button id="clear-btn">Clear All</button>
+  <div id="log-list" style="margin-top: 1em;">
+    <!-- Log entries will be styled by confidence level -->
+  </div>
+  <style>
+    .log-entry {
+      padding: 6px 10px;
+      margin-bottom: 5px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 13px;
+      white-space: nowrap;
+      overflow-x: auto;
+    }
+
+    .log-entry.low-confidence {
+      background-color: #f2f2f2;
+      color: #333;
+    }
+
+    .log-entry.high-confidence {
+      background-color: #ffe6e6;
+      color: #b30000;
+      font-weight: bold;
+    }
+  </style>
+
+  <script type="module" src="/src/popup/popup.ts"></script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+{
+	"manifest_version": 3,
+	"name": "AI Traffic Classifier Extension",
+	"description": "Monitors and classifies AI-related web traffic in real time.",
+	"version": "1.0",
+	"permissions": ["webRequest", "storage", "tabs"],
+	"host_permissions": ["<all_urls>"],
+	"background": {
+		"service_worker": "assets/background.js"
+	},
+	"action": {
+		"default_popup": "/src/popup/popup.html",
+		"default_title": "AI Traffic Monitor"
+	}
+}
