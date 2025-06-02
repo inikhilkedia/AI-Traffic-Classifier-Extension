@@ -2,6 +2,8 @@
 
 A Chrome extension that monitors and classifies web traffic to identify AI-related API calls and services. This tool helps developers and security professionals track AI service usage across different websites.
 
+![Screenshot 2025-06-01 at 7 13 56 PM](https://github.com/user-attachments/assets/8d21a8cc-f5ff-4675-91bd-8d086268d9f3)
+
 ## 📚 Table of Contents
 
 - [AI Traffic Classifier Chrome Extension](#ai-traffic-classifier-chrome-extension)
