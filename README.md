@@ -2,6 +2,27 @@
 
 A Chrome extension that monitors and classifies web traffic to identify AI-related API calls and services. This tool helps developers and security professionals track AI service usage across different websites.
 
+## 📚 Table of Contents
+
+- [AI Traffic Classifier Chrome Extension](#ai-traffic-classifier-chrome-extension)
+  - [📚 Table of Contents](#-table-of-contents)
+  - [Features](#features)
+  - [🤖 Why AI Detection?](#-why-ai-detection)
+  - [Technical Details](#technical-details)
+    - [System Architecture](#system-architecture)
+    - [Data Flow](#data-flow)
+    - [Component Interaction](#component-interaction)
+    - [Core Source Files Overview](#core-source-files-overview)
+    - [Detection Patterns](#detection-patterns)
+  - [Installation](#installation)
+  - [Development](#development)
+  - [Usage](#usage)
+  - [Privacy](#privacy)
+  - [🚧 Roadmap](#-roadmap)
+  - [Contributing](#contributing)
+  - [🔗 Related Tools](#-related-tools)
+  - [License](#license)
+
 ## Features
 
 - 🔍 **Real-time Traffic Monitoring**: Intercepts and analyzes web requests in real-time
@@ -22,6 +43,14 @@ A Chrome extension that monitors and classifies web traffic to identify AI-relat
   - Full URL
   - Confidence level
   - Host information
+
+## 🤖 Why AI Detection?
+
+With the rise of AI services embedded into web platforms, it's becoming increasingly important to track when and how AI APIs are called. This extension helps:
+
+- Developers understand AI integrations across websites
+- Security engineers audit third-party AI usage
+- Researchers measure AI adoption patterns
 
 ## Technical Details
 
@@ -73,6 +102,28 @@ A Chrome extension that monitors and classifies web traffic to identify AI-relat
 [Popup UI] <----> [User]
 ```
 
+### Core Source Files Overview
+
+This section provides a high-level overview of how the extension's source files interact and operate together:
+
+- 🧠 **`src/background/index.ts`**  
+  Entry point for the background service worker. Registers listeners and initializes request handling logic.
+
+- 🛡️ **`src/background/webRequest.ts`**  
+  Intercepts HTTP/S requests using `chrome.webRequest`. Classifies requests and stores AI-related entries. Updates the badge count.
+
+- 💾 **`src/background/storage.ts`**  
+  Handles local data storage using `chrome.storage.local`. Manages storing, retrieving, and clearing of logs, as well as badge count updates.
+
+- 🧮 **`src/utils/filter.ts`**  
+  Contains logic to detect and score potential AI-related traffic based on domains and paths.
+
+- 🧩 **`src/popup/popup.html`**  
+  Defines the visual structure of the popup shown when clicking the extension icon.
+
+- 🎛️ **`src/popup/popup.ts`**  
+  Manages the popup's behavior: fetches logs, styles entries based on confidence, and handles user interactions like "Clear Logs".
+
 ### Detection Patterns
 
 The extension monitors for requests matching these patterns:
@@ -122,21 +173,22 @@ The extension monitors for requests matching these patterns:
 
 - **Project Structure**:
 
-  ```
-  ├── src/
-  │   ├── background/     # Service worker and request handling
-  │   ├── popup/         # Extension popup UI
-  │   ├── utils/         # Shared utilities
-  │   └── manifest.json  # Extension configuration
-  ├── public/            # Static assets
-  └── dist/             # Build output
-  ```
+```tree
+├── src/
+│   ├── background/     # Service worker and request handling
+│   ├── popup/         # Extension popup UI
+│   ├── utils/         # Shared utilities
+│   └── manifest.json  # Extension configuration
+├── public/            # Static assets
+└── dist/             # Build output
+```
 
 - **Development Commands**:
-  ```bash
-  npm run dev     # Start development build
-  npm run build   # Create production build
-  ```
+
+```bash
+npm run dev     # Start development build
+npm run build   # Create production build
+```
 
 ## Usage
 
@@ -152,9 +204,22 @@ The extension monitors for requests matching these patterns:
 - No data is sent to external servers
 - You can clear all stored data at any time
 
+## 🚧 Roadmap
+
+- [ ] Support export of logs to file
+- [ ] Add user-configurable detection filters
+- [ ] Enhance AI pattern matching with ML
+- [ ] Dark mode for popup UI
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 🔗 Related Tools
+
+- [Chrome DevTools Network Panel](https://developer.chrome.com/docs/devtools/network/)
+- [Wappalyzer](https://www.wappalyzer.com/) - technology profiler for browser
+- [Ghostery](https://www.ghostery.com/) - tracker & ad blocker with network insights
 
 ## License
 
